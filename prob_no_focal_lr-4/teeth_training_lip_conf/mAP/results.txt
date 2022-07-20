@@ -5,4 +5,4 @@
 
 
 # mAP of all classes
-mAP = 100.000%, 14.30 FPS
+mAP = 100.000%, 13.00 FPS
