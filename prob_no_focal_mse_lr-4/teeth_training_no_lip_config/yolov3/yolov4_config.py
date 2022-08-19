@@ -569,13 +569,13 @@ def compute_loss(pred, conv, label, bboxes, i=0, CLASSES=YOLO_COCO_CLASSES):
     # Calculate the loss of confidence
     # we hope that if the grid contains objects, then the network output prediction box has a confidence of 1 and 0 when there is no object.
     # config
-    conf_loss = 10 * (
-            respond_bbox * tf.nn.sigmoid_cross_entropy_with_logits(labels=respond_bbox, logits=conv_raw_conf)
+    conf_loss =   10*(
+            respond_bbox * tf.reshape(tf.keras.losses.MSE(respond_bbox, conv_raw_conf), list(respond_bbox.shape))
             +
-            respond_bgd * tf.nn.sigmoid_cross_entropy_with_logits(labels=respond_bbox, logits=conv_raw_conf)
+            respond_bgd * tf.reshape(tf.keras.losses.MSE(respond_bbox, conv_raw_conf), list(respond_bbox.shape))
     )
-    #config
-    prob_loss =  respond_bbox * tf.nn.sigmoid_cross_entropy_with_logits(labels=label_prob, logits=conv_raw_prob)
+    # config
+    prob_loss =  respond_bbox * tf.reshape(tf.keras.losses.MSE(label_prob, conv_raw_prob), list(respond_bbox.shape))
 
     giou_loss = tf.reduce_mean(tf.reduce_sum(giou_loss, axis=[1,2,3,4]))
     conf_loss = tf.reduce_mean(tf.reduce_sum(conf_loss, axis=[1,2,3,4]))
