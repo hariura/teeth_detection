@@ -587,8 +587,9 @@ def compute_loss(pred, conv, label, bboxes, i=0, CLASSES=YOLO_COCO_CLASSES):
 #     print(respond_bbox, list(respond_bbox.shape))
 #     print(conv_raw_conf, list(conv_raw_conf))
     
-    bb_loss = tf.reduce_mean(tf.reduce_sum(bb_loss, axis=[1,2,3,4]))
-    conf_loss = tf.reduce_mean(tf.reduce_sum(conf_loss, axis=[1,2,3,4]))
-    prob_loss = tf.reduce_mean(tf.reduce_sum(prob_loss, axis=[1,2,3,4]))
+    bb_loss = tf.reduce_sum(tf.reduce_sum(bb_loss, axis=[1,2,3,4]))
+    conf_loss = tf.reduce_sum(tf.reduce_sum(conf_loss, axis=[1,2,3,4]))
+    prob_loss = tf.reduce_sum(tf.reduce_sum(prob_loss, axis=[1,2,3,4]))
+
 
     return bb_loss, conf_loss, prob_loss

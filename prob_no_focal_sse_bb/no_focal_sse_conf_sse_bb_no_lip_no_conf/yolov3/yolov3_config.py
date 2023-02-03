@@ -351,8 +351,8 @@ def compute_loss(pred, conv, label, bboxes, i=0, CLASSES=YOLO_COCO_CLASSES):
     conf_focal = tf.pow(respond_bbox - pred_conf, 2)
 
     # compute bb loss (create)
-    xy_loss = respond_bbox * tf.reshape(2*tf.keras.losses.MSE(pred_xywh[:, :, :, :, 0:2]/(input_size ** 2), label_xywh[:, :, :, :, 0:2]/ (input_size ** 2)), list(respond_bbox.shape))
-    wh_loss = respond_bbox * tf.reshape(2*tf.keras.losses.MSE(tf.sqrt(pred_xywh[:, :, :, :, 2:4])/ (input_size ** 2), tf.sqrt(label_xywh[:, :, :, :, 2:4]/ (input_size ** 2))), list(respond_bbox.shape))
+    xy_loss = respond_bbox * tf.reshape(2*tf.keras.losses.MSE(pred_xywh[:, :, :, :, 0:2]/(input_size), label_xywh[:, :, :, :, 0:2]/ (input_size )), list(respond_bbox.shape))
+    wh_loss = respond_bbox * tf.reshape(2*tf.keras.losses.MSE(tf.sqrt(pred_xywh[:, :, :, :, 2:4]/ (input_size)), tf.sqrt(label_xywh[:, :, :, :, 2:4]/ (input_size ))), list(respond_bbox.shape))
     # wh_loss = respond_bbox * bbox_loss_scale* tf.square(pred_xywh[:, :, :, :, 2:4] - label_xywh[:, :, :, :, 2:4])
     bb_loss = xy_loss + wh_loss
     
@@ -371,8 +371,9 @@ def compute_loss(pred, conv, label, bboxes, i=0, CLASSES=YOLO_COCO_CLASSES):
 #     print(respond_bbox, list(respond_bbox.shape))
 #     print(conv_raw_conf, list(conv_raw_conf))
     
-    bb_loss = tf.reduce_mean(tf.reduce_sum(bb_loss, axis=[1,2,3,4]))
-    conf_loss = tf.reduce_mean(tf.reduce_sum(conf_loss, axis=[1,2,3,4]))
-    prob_loss = tf.reduce_mean(tf.reduce_sum(prob_loss, axis=[1,2,3,4]))
+    bb_loss = tf.reduce_sum(tf.reduce_sum(bb_loss, axis=[1,2,3,4]))
+    conf_loss = tf.reduce_sum(tf.reduce_sum(conf_loss, axis=[1,2,3,4]))
+    prob_loss = tf.reduce_sum(tf.reduce_sum(prob_loss, axis=[1,2,3,4]))
+
 
     return bb_loss, conf_loss, prob_loss
