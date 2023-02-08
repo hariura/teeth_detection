@@ -1,0 +1,1 @@
+/home/jh/Desktop/teeth/github_td/teeth_detection/test8/seed_test_2/teeth_excluding_lip_more/train/143_2_2.jpg 17,183,448,448,0
