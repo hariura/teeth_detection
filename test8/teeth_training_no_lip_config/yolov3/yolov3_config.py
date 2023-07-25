@@ -339,7 +339,7 @@ def compute_loss(pred, conv, label, bboxes, i=0, CLASSES=YOLO_COCO_CLASSES):
 
     bbox_loss_scale = 2.0 - 1.0 * label_xywh[:, :, :, :, 2:3] * label_xywh[:, :, :, :, 3:4] / (input_size ** 2)
     # config
-    giou_loss =  respond_bbox * bbox_loss_scale * (1 - giou)
+    giou_loss = 1/22 * respond_bbox * bbox_loss_scale * (1 - giou)
 
     iou = bbox_iou(pred_xywh[:, :, :, :, np.newaxis, :], bboxes[:, np.newaxis, np.newaxis, np.newaxis, :, :])
     # Find the value of IoU with the real box The largest prediction box
@@ -353,13 +353,13 @@ def compute_loss(pred, conv, label, bboxes, i=0, CLASSES=YOLO_COCO_CLASSES):
     # Calculate the loss of confidence
     # we hope that if the grid contains objects, then the network output prediction box has a confidence of 1 and 0 when there is no object.
     # config
-    conf_loss = 10 * conf_focal * (
+    conf_loss = 20/22 * conf_focal * (
             respond_bbox * tf.nn.sigmoid_cross_entropy_with_logits(labels=respond_bbox, logits=conv_raw_conf)
             +
             respond_bgd * tf.nn.sigmoid_cross_entropy_with_logits(labels=respond_bbox, logits=conv_raw_conf)
     )
     # config
-    prob_loss =  respond_bbox * tf.nn.sigmoid_cross_entropy_with_logits(labels=label_prob, logits=conv_raw_prob)
+    prob_loss = 1/22 * respond_bbox * tf.nn.sigmoid_cross_entropy_with_logits(labels=label_prob, logits=conv_raw_prob)
 
     giou_loss = tf.reduce_mean(tf.reduce_sum(giou_loss, axis=[1,2,3,4]))
     conf_loss = tf.reduce_mean(tf.reduce_sum(conf_loss, axis=[1,2,3,4]))
