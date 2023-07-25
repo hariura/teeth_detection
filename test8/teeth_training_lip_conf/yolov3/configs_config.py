@@ -39,7 +39,7 @@ TRAIN_YOLO_TINY             = False
 TRAIN_SAVE_BEST_ONLY        = True # saves only best model according validation loss (True recommended)
 TRAIN_SAVE_CHECKPOINT       = False # saves all best validated checkpoints in training process (may require a lot disk space) (False recommended)
 TRAIN_CLASSES               = "./model_data/classes.txt"
-TRAIN_ANNOT_PATH            = "./model_data/no_lip_more_train.txt"
+TRAIN_ANNOT_PATH            = "./model_data/lip_more_train.txt"
 TRAIN_LOGDIR                = "log"
 TRAIN_CHECKPOINTS_FOLDER    = "checkpoints"
 TRAIN_MODEL_NAME            = f"{YOLO_TYPE}_custom"
@@ -55,7 +55,7 @@ TRAIN_WARMUP_EPOCHS         = 2
 TRAIN_EPOCHS                = 500
 
 # TEST options
-TEST_ANNOT_PATH             = "model_data/no_lip_more_validation.txt"
+TEST_ANNOT_PATH             = "model_data/lip_more_validation.txt"
 TEST_BATCH_SIZE             = 4
 TEST_INPUT_SIZE             = 416
 TEST_DATA_AUG               = False

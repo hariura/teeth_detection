@@ -1,8 +1,0 @@
-# AP and precision/recall per class
-1.176% = teeth AP  
- Precision: ['0.000', '1.000', '0.000']
- Recall   :['0.000', '0.012', '1.000']
-
-
-# mAP of all classes
-mAP = 1.176%, 18.36 FPS

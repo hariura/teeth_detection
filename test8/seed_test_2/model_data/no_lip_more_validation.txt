@@ -1,4 +1,0 @@
-/home/jh/Desktop/teeth/github_td/teeth_detection/test8/seed_test_2/teeth_excluding_lip_more/test/144_2_2.jpg 36,256,448,412,0
-/home/jh/Desktop/teeth/github_td/teeth_detection/test8/seed_test_2/teeth_excluding_lip_more/test/202_2_3.jpg 122,198,406,346,0
-/home/jh/Desktop/teeth/github_td/teeth_detection/test8/seed_test_2/teeth_excluding_lip_more/test/206_2_1.jpg 138,197,398,346,0
-/home/jh/Desktop/teeth/github_td/teeth_detection/test8/seed_test_2/teeth_excluding_lip_more/test/174_2_1.jpg 56,179,378,298,0
